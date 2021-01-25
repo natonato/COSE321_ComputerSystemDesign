@@ -1,0 +1,50 @@
+	uart_init
+
+	ldr r0, =UART1_BASE
+	ldr r1, =0x12F45A70
+	mov r5, #9
+
+init_loop:
+	ldr 	r2, [r0, #UART_CHANNEL_STS_REG0_OFFSET]	@ get Channel Status Register
+	and	r2, r2, #0x8		@ get Transmit Buffer Empty bit(bit[3:3])
+	cmp	r2, #0x8				@ check if TxFIFO is empty and ready to receive new data
+	bne	init_loop		@ if TxFIFO is NOT empty, keep checking until it is empty
+
+	cmp r5, #9
+	moveq r3, #48
+	streq r3, [r0, #UART_TX_RX_FIFO0_OFFSET]
+	cmp r5, #8
+	moveq r3, #120
+	streq r3, [r0, #UART_TX_RX_FIFO0_OFFSET]
+	sub r5, #1
+	bne init_loop
+TRANSMIT_loop:
+
+	// ---------  Check to see if the Tx FIFO is empty ------------------------------
+	ldr 	r2, [r0, #UART_CHANNEL_STS_REG0_OFFSET]	@ get Channel Status Register
+	and	r2, r2, #0x8		@ get Transmit Buffer Empty bit(bit[3:3])
+	cmp	r2, #0x8				@ check if TxFIFO is empty and ready to receive new data
+	bne	TRANSMIT_loop		@ if TxFIFO is NOT empty, keep checking until it is empty
+	//------------------------------------------------------------------------------
+
+
+	mov r7, #0  // 나누기 결과가 담길 reg
+	mov r8, #1	// 나눌 reg
+	mov r8, r8, LSL r5
+	mov r8, r8, LSL r5
+	mov r8, r8, LSL r5
+	mov r8, r8, LSL r5
+	DEV_loop:
+		subs r1, r1, r8
+		addpl r7, r7, #1
+		bpl DEV_loop
+	add r1, r1, r8
+	//sub r7, r7, #1
+	cmp r7, #9
+	addgt r7, r7, #87
+	addle r7, r7, #48
+
+	str	r7, [r0, #UART_TX_RX_FIFO0_OFFSET]	@ fill the TxFIFO with 0x48
+	sub r5, r5, #1
+	cmp r5, #-1
+	bne		TRANSMIT_loop

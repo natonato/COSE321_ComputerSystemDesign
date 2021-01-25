@@ -1,0 +1,106 @@
+string1:
+	.ascii "-----------------------------------------------------------------------------------------------------"
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "r0 = "
+	.byte 0x00
+string2:
+	.ascii ", r1 = "
+	.byte 0x00
+string3:
+	.ascii ", r2 = "
+	.byte 0x00
+string4:
+	.ascii ", r3 = "
+	.byte 0x00
+string5:
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "r4 = "
+	.byte 0x00
+string6:
+	.ascii ", r5 = "
+	.byte 0x00
+string7:
+	.ascii ", r6 = "
+	.byte 0x00
+string8:
+	.ascii ", r7 = "
+	.byte 0x00
+string9:
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "r8 = "
+	.byte 0x00
+string10:
+	.ascii ", r9 = "
+	.byte 0x00
+string11:
+	.ascii ", r10 = "
+	.byte 0x00
+string12:
+	.ascii ", r11 = "
+	.byte 0x00
+string13:
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "r12 = "
+	.byte 0x00
+string14:
+	.ascii ", r13 = "
+	.byte 0x00
+string15:
+	.ascii ", r14 = "
+	.byte 0x00
+string16:
+	.ascii ", r15 = "
+	.byte 0x00
+string17:
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "cpsr = "
+	.byte 0x00
+string18:
+	.ascii ", "
+	.byte 0x00
+string19:
+	.ascii ", current mode = "
+	.byte 0x00
+string20:
+	.ascii " ( ="
+	.byte 0x00
+string21:
+	.ascii ")"
+	.byte 0x0D
+	.byte 0x0A
+	.ascii "----------------------------------------------------------------------------------------"
+	.byte 0x00
+
+stringARM:
+	.ascii ", ARM mode"
+	.byte 0x00
+stringThumb:
+	.ascii ", Thumb mode"
+	.byte 0x00
+
+stringUSR:
+	.ascii "USR"
+	.byte 0x00
+stringFIQ:
+	.ascii "FIQ"
+	.byte 0x00
+stringIRQ:
+	.ascii "IRQ"
+	.byte 0x00
+stringSVC:
+	.ascii "SVC"
+	.byte 0x00
+stringABT:
+	.ascii "ABT"
+	.byte 0x00
+stringUND:
+	.ascii "UND"
+	.byte 0x00
+stringSYS:
+	.ascii "SYS"
+	.byte 0x00
